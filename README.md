@@ -22,7 +22,7 @@ This terraform workflow will quick start all the necessary components for creati
 3. Create a file called terraform.tfvars with the following content (CHANGE_ME where needed):
     ```
     cluster_name     = "CHANGE_ME"
-    aws_region       = "ap-southeast-2"
+    aws_region       = "CHANGE_ME"
     env              = "CHANGE_ME"
     vpc_cidr_block   = "10.0.0.0/18"
     account_owner    = "replicated-dev"
