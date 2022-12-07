@@ -1,0 +1,8 @@
+.terraform
+.terraform.lock.hcl
+kurl-current-config.json
+terraform.tfvars
+backend.tf
+.terraform.tfstate*
+backend.tf.example
+kurl-config.yaml
