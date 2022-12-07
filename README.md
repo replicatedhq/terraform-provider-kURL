@@ -76,3 +76,5 @@ This terraform workflow will quick start all the necessary components for creati
     sudo su
     kubectl get node
     ```
+## Clean Up
+1. Run `make destroy` or `terraform destroy`
