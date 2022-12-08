@@ -1,3 +1,7 @@
+locals {
+  enable_node = var.desired_node_size > 0
+}
+
 # AMI of the latest Amazon Linux 2
 data "aws_ami" "this" {
   most_recent = true
@@ -74,6 +78,7 @@ resource "aws_autoscaling_group" "master" {
 }
 
 resource "aws_launch_template" "node" {
+  count         = local.enable_node ? 1 : 0
   name_prefix   = "${var.name}-kurl-node-instance"
   image_id      = var.image_id != "" ? var.image_id : data.aws_ami.this.id
   instance_type = "t3.xlarge"
@@ -104,20 +109,21 @@ resource "aws_launch_template" "node" {
     }
   }
 
-  user_data   = base64encode(data.template_file.node_user_data.rendered)
+  user_data   = base64encode(data.template_file.node_user_data[0].rendered)
   description = "Launch template for kurl node instance ${var.name}"
   tags        = local.common_node_tags
 }
 
 resource "aws_autoscaling_group" "node" {
+  count               = local.enable_node ? 1 : 0
   name                = "${var.name}-kurl-node-asg"
   vpc_zone_identifier = var.node_subnets
-  desired_capacity    = 1
-  max_size            = 1
-  min_size            = 1
+  desired_capacity    = var.desired_node_size
+  max_size            = 10
+  min_size            = 0
 
   launch_template {
-    id      = aws_launch_template.node.id
+    id      = aws_launch_template.node[0].id
     version = "$Latest"
   }
 

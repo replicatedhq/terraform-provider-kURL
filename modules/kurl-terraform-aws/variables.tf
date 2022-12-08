@@ -68,3 +68,9 @@ variable "kurl_config" {
   type        = string
   default     = ""
 }
+
+variable "desired_node_size" {
+  description = "The number of Amazon EC2 instances that should be running in the autoscaling group"
+  type        = number
+  default     = 0
+}

@@ -27,6 +27,7 @@ This terraform workflow will quick start all the necessary components for creati
     vpc_cidr_block   = "10.0.0.0/18"
     account_owner    = "replicated-dev"
     kurl_config_path = "kurl-config.yaml"
+    desired_node_size = 0
     public_cidr_block_map = {
         a = "10.0.0.0/22",
         b = "10.0.4.0/22",

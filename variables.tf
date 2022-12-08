@@ -39,3 +39,8 @@ variable "kurl_config_path" {
   description = "File path of kurl config yaml"
   type        = string
 }
+variable "desired_node_size" {
+  description = "The number of Amazon EC2 instances that should be running in the autoscaling group"
+  type        = number
+  default     = 0
+}
